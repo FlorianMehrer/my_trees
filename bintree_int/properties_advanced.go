@@ -5,8 +5,33 @@ package bintree_int
 // Ein Baum ist perfekt, wenn alle Blätter die gleiche Tiefe haben und
 // alle inneren Knoten genau zwei Kinder haben.
 func (e *Element) IsPerfect() bool {
-	// TODO
-	return false
+	if e.left.Height() != e.right.Height() {
+		return false
+	}
+
+	if e.left.IsLeaf() == false {
+		if e.left.HasTwoChildren() == false {
+			return false
+		}
+	}
+	if e.left.IsLeaf() {
+		return true
+	}
+	if e.right.IsLeaf() == false {
+		if e.right.HasTwoChildren() == false {
+			return false
+		}
+	}
+	if e.right.IsLeaf() {
+		return true
+	}
+	return e.left.IsPerfect() && e.right.IsPerfect()
+}
+func (e *Element) HasTwoChildren() bool {
+	if e.left.IsEmpty() || e.right.IsEmpty() {
+		return false
+	}
+	return true
 }
 
 // IsComplete liefert true zurück, wenn der Baum vollständig ist.
